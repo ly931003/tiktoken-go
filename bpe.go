@@ -4,7 +4,7 @@ import (
 	"math"
 )
 
-func bytePairMerge[T any](piece []byte, ranks map[string]int, f func(start, end int) T) []T {
+func bytePairMerge(piece []byte, ranks map[string]int, f func(start, end int) int) []int {
 	parts := make([][2]int, len(piece)+1)
 	for i := 0; i < len(parts); i++ {
 		parts[i][0], parts[i][1] = i, math.MaxInt // use max int as sentinel
@@ -57,7 +57,7 @@ func bytePairMerge[T any](piece []byte, ranks map[string]int, f func(start, end 
 		}
 	}
 
-	out := make([]T, len(parts)-1)
+	out := make([]int, len(parts)-1)
 	for i := 0; i < len(out); i++ {
 		out[i] = f(parts[i][0], parts[i+1][0])
 	}
